@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+	<div id="app"></div>
+	<script src="js/react.development.js"></script>
+	<script src="js/react-dom.development.js"></script>
+	<script src="js/babel.min.js"></script>
+
+	<script type="text/babel">
+
+		class App extends React.Component { 
+			render () {
+				return (
+					<div>
+						{/*  属性的绑定*/}
+						<BindDemo />
+
+						{ /* 事件的绑定*/}
+						<BindEvent />
+
+						{/*事件参数传递*/}
+						<SendNum />
+						{/*条件渲染*/}
+						<IfDemo />
+						{/*列表渲染*/}
+						<ListDemo />
+					</div>
+				)
+			}
+		} 
+
+		// 属性的绑定
+		class BindDemo extends React.Component {
+			constructor() {
+				super()
+				this.state = {
+					title: '木瓜娃子',
+					imgUrl: 'images/my-bg.jpg',
+					link: 'http://www.baidu.com',
+					active: true
+				}
+			}
+			render () {
+				const { title, imgUrl, link, active } = this.state 
+				return (
+					<div>
+						{ /*绑定基本的属性 */}     
+						<div>
+							<h2>{ title }</h2>
+						  <img src={imgUrl} alt="" style={{width: '250px'}} />
+							<a href={link}>去百度看看吧</a>
+						</div> 
+
+						{ /*绑定class */}     
+						<div className="first">来呀  快活呀</div>
+            <div className={"first " + (active ? "active": "")}>嘿嘿嘿嘿</div>
+					</div>
+				)
+			} 
+		}
+
+		// 事件绑定
+		class BindEvent extends React.Component {
+			constructor(){
+				super()
+				this.state = {
+					msg: '愚蠢的大傻'
+				}
+
+				// 第二
+				this.secondBtn = this.secondBtn.bind(this)
+			}
+
+			// 第一
+			firstBtn () {
+				console.log("第一个绑定")
+			}
+
+			// 第二
+			secondBtn () {
+				console.log("第二个绑定")
+			}
+
+			// 第三
+			thirdBtn = () => {
+				console.log("箭头函数")
+			}
+
+			// 第四
+			fourth () {
+				console.log("推荐使用的箭头函数升级版")
+			}
+
+			render () {
+				return (
+					<div> 
+						{ /* 第一   bind绑定this  显示绑定*/} 
+						<button onClick={this.firstBtn.bind(this)}>第一个绑定</button>						
+						<button onClick={this.secondBtn}>第二个绑定</button>
+
+						{ /*箭头函数*/} 
+						<button onClick={this.thirdBtn}>箭头函数</button>
+
+						{/* 箭头函数升级版 （推荐使用）*/}
+						<button onClick={() => { this.fourth("rabbit") }}>推荐使用的箭头函数升级版</button> 
+					</div>
+				)
+			}  
+		}
+		
+		// 事件传参数
+		class SendNum extends React.Component {
+			constructor() {
+				super()
+
+				this.state = {
+					lists: ['上', '下', '左', '右', 'B', 'A']
+				}  
+			}
+
+			bar (el, index, e) {
+				console.log(e)
+			}
+			
+			render () {
+				const { lists } = this.state
+				return (
+					<div>
+						<ul>
+							
+							{
+								lists.map((el, index) => {
+									return (
+										<li onClick={ (e) => { this.bar(el, index, e)}} key={index}>
+											{el}
+										</li>
+									) 
+								})
+							} 
+						</ul>
+						
+					</div>
+				)
+			}
+		}
+
+		// 条件渲染
+		class IfDemo extends React.Component {
+			constructor () {
+				super()
+				this.state = {
+					isLogin: false
+				}
+			}
+
+			login () {
+				this.setState({
+					isLogin: !this.state.isLogin
+				})
+			}
+
+			render () {
+				const { isLogin } = this.state
+				return (
+					<div>
+						<h2>条件渲染</h2>
+						<button onClick={ () => { this.login()}}>{ isLogin ? '注销' : '登录'} </button>	
+						<div className={isLogin ? 'showContent': 'hideContent'}> 
+							来呀！快活呀 
+						</div>
+						
+						
+					</div>
+				)
+			}
+		}
+
+		// 列表渲染
+		class ListDemo extends React.Component {
+			constructor () {
+				super()
+				this.state = {
+					lists: ["蒙奇D黄猿", "索隆",  "阿尔" , "罗兰", "魅影"],
+					numLists: ["1", "243", "125", "142", "12", "42", "32", "25", "22", "24", "12" ]
+				}
+			}
+
+			render () {
+				return (
+
+					<div>
+						<h2>列表渲染</h2>
+						<ul>
+              {
+                this.state.lists.map((el, index) => {
+                  return <li key={index}>{el}</li>
+                })
+              }
+						</ul>
+						
+						<h2>过滤</h2>
+						<ul>
+              {
+                this.state.numLists.filter(item=> {
+                 return item > 100
+                }).map((el, index) => {
+									return <li key={index}>{el}</li>
+								})
+              }
+						</ul>
+
+						<h2>过滤整洁代码</h2>
+						<ul>
+              {
+                this.state.numLists.filter(item => item < 30 ).map((el, index) => {
+									return <li key={index}>{el}</li>
+								})
+              }
+						</ul>
+
+
+
+						<h2>截取需要的内容</h2>
+            <ul>
+              {
+                this.state.numLists.slice(0, 6).map((el, index) => {
+                  return <li key={index}>{el}</li>
+                })
+              }
+            </ul>
+
+
+					</div>
+
+
+
+
+				)
+			}
+		}
+
+
+
+
+		ReactDOM.render(<App />, document.getElementById("app"))
+    </script>
+
+
+</body>
+
+</html>

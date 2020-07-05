@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+  <div id="app">
+
+  </div>
+  
+
+
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+
+    // let msg = 'Hello My React'
+    // // 首次见面
+    // firstRender ()
+    // function firstRender () {
+    //   ReactDOM.render(
+    //     <div>
+    //       <h2>  {msg}  </h2>
+    //       <button onClick={update}>修改</button>
+    //     </div>,
+    //     document.getElementById("app")
+    //   )
+    // }
+    
+    // // 回复见面礼
+    // function update () {
+    //   msg = 'Happy together width me'
+    //   firstRender()
+    // }
+      
+      class App extends React.Component {
+        constructor () {
+          super()
+          this.state = {
+            msg: 'Hello My React',
+            active: false
+          }
+        }
+
+        update = () => {
+          if (!this.state.active) {
+            this.setState({
+              msg: 'Happy together width me',
+              active: !this.state.active
+            })
+          } else {
+              this.setState({
+              msg: 'Hello My React',
+              active: !this.state.active
+            })
+          }
+        } 
+        render () {
+          return  (
+            <div>
+              <h2 className={this.state.active ? 'active' : "" }>{ this.state.msg }</h2>
+              <button onClick={this.update}>切换</button>
+            </div>
+          )
+        } 
+      }
+
+      ReactDOM.render(<App />, document.getElementById("app"))
+  </script>
+
+
+</body>
+</html>

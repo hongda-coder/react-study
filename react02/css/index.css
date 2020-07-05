@@ -1,0 +1,41 @@
+.active {
+  color: #ff5777;
+}
+
+li {
+  list-style: none;
+  line-height: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.wrap {
+  display: flex;
+}
+
+.nav {
+  width: 100px;
+  background: #ff5777;
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  background: pink;
+}
+
+.content p  {
+  line-height: 30px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  display: none;
+}
+
+.content .show {
+  display: block;
+}

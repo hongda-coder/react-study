@@ -1,0 +1,11 @@
+.active{
+  color: #ff5777;
+}
+
+.showContent {
+  display: block;
+}
+
+.hideContent {
+  display: none;
+}

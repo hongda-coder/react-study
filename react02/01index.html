@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+  <div id="app">
+
+  </div>
+  
+
+
+  <script src="js/react.development.js"></script>
+  <script src="js/react-dom.development.js"></script>
+  <script src="js/babel.min.js"></script>
+  <script type="text/babel">
+
+    // 总的
+    class App extends React.Component {
+      render () {
+        return (
+          <div>
+            <Toggle />
+            <Count />
+          </div>
+        )
+      }
+    }
+ 
+    // 切换
+    class Toggle extends React.Component {
+      constructor () {
+        super()
+        this.state = {
+          current: 0,
+          course: [
+            { 
+              name: 'vue', 
+              desc: '尤雨溪搞出来的'
+            },
+            { 
+              name: 'react', 
+              desc: 'face Book 搞出来的'
+            },
+            { 
+              name: '15k', 
+              desc: 'good good study day day up  出来的'
+            }
+          ]
+        }
+      }
+
+      handlerCourse = (e) => {
+        let index = e.target.getAttribute("data-index")
+        this.setState({
+          current: index
+        })
+      } 
+        render () {
+          return  (
+            <div className="wrap">
+              <ul className="nav">
+                {
+                  this.state.course.map((item, index) => {
+                    return <li key={index} data-index={index} onClick={this.handlerCourse}>{item.name}</li>
+                  })
+                }
+              </ul>
+              <div className="content">
+                {
+                  this.state.course.map((item, index) => {
+                    return <p key={index} className={ this.state.current == index ? 'show' : '' }>{item.desc}</p>
+                  }) 
+                } 
+              </div> 
+            </div>
+          )
+      } 
+    }
+ 
+    // 计算
+    class Count extends React.Component {
+      constructor () {
+        super()  
+        this.state = {
+          dollar: 0,
+          RMB: 0
+        }
+      }
+
+      // 添加
+      increment = () => {
+        const { dollar, RMB } = this.state  // 解析 
+        this.setState({ 
+          RMB: RMB + 1,
+          dollar: (RMB + 1) * 7
+        }) 
+      }
+
+      // 减少
+      decrement = () => {
+        const { dollar, RMB } = this.state 
+        this.setState({
+          RMB: RMB - 1,
+          dollar: (RMB - 1) * 7
+        }) 
+      }
+
+      render () {
+        const { dollar, RMB } = this.state
+        return (
+          <div>
+            <div>
+              美元： { dollar }
+            </div>
+            <div>
+              人民币：{ RMB }
+            </div>
+
+            <div>
+              <button onClick={ this.increment }>+1RMB</button>
+              <button onClick={ this.decrement}>-1RMB</button>
+            </div>
+          </div>
+        )
+      }
+    }
+ 
+    ReactDOM.render(<App />, document.getElementById("app"))
+  </script>
+
+
+</body>
+</html>
