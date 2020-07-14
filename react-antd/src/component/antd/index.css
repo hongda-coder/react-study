@@ -1,0 +1,21 @@
+.wrap {
+  width: 500px;
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.table {
+  margin-left: 200px;
+  margin-top: 50px;
+  padding-right: 30px;
+  box-sizing: border-box;
+}
+
+.page {
+  position: relative;
+  width: 300px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 35px;
+}
