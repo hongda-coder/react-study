@@ -1,0 +1,59 @@
+
+.content {
+  width: 240px;
+  margin: 60px auto;
+}
+
+/* 开始状态 */
+.card-enter,.card-appear {
+  opacity: 0;
+  transform: scale(.5);
+}
+
+.card-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 执行时候的动画 */ 
+.card-enter-active,.card-appear-active {
+  opacity: 1;
+  transform: scale(1);
+  transition:  all .5s;
+}
+
+.card-exit-active {
+  opacity: 0;
+  transform: scale(.5);
+  transition:  all .5s;
+}
+
+/* 执行完成 */
+.card-exit-done {
+  opacity: 0;
+} 
+
+.card-enter-done {
+  opacity: 1;
+}
+ 
+
+button {
+  background: #ff5777;
+  color: #fff;
+  border: none;
+  cursor: pointer; 
+  outline: none
+}
+
+
+/* button:hover {
+  opacity: .8;
+} */
+ 
+button:active {
+  opacity: .8;
+}
+
+
+ 
